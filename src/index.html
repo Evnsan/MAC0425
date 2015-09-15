@@ -1,0 +1,91 @@
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/stylesheet.css">
+  </head>
+  <body>
+	<div class="container-fluid">
+		<div id="title" class="row text-center">
+			<h1>Tetris AI</h1>
+			<h4>DEFINIR META >> BUSCAR SOLUÇÃO >> EXECUTAR!</h4>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4 panel-left">
+				<div class="row">
+					<div id="stats">
+						<h3>Timesteps <span id="timestep"></span></h3>
+						<h3>Pontos <span id="score"></span></h3>
+						<h3>Linhas <span id="lines"></span></h3>
+					</div>	
+				</div>
+				<div class="row">
+					<div id="control">
+						<div id="mode">
+							<h4>Modo:</h4>
+							<label for="mode-game">
+								<input id="mode-game" type="radio" name="mode" value="game" checked> Jogo
+							</label>
+							<label for="mode-test">
+								<input id="mode-test" type="radio" name="mode" value="test"> Teste
+							</label>
+						</div>
+						<div id="search">
+							<h4>Busca:</h4>
+							<select name="search-type" id="search-type" class="form-control">
+								<option value="DFS" selected>Busca em Profundidade</option>
+								<option value="BFS">Busca em Largura</option>
+								<option value="BestFS">Busca de Melhor Escolha</option>
+								<option value="ASTAR">Busca A*</option>
+							</select>
+						</div>
+						<button id="start-button" type="button" class="btn btn-danger">
+							START!
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div id="tetris-canvas"></div>
+			</div>
+			<div id="search-info" class="col-sm-4 panel-right">
+				<div id="solution-actions">
+					<label>Solução:<textarea id="solution-input" class="form-control" rows="13"></textarea></label>
+				</div>
+				<div id="solution-info">
+					<label>Estatísticas:<textarea id="solution-stats" class="form-control" rows="5"></textarea></label>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<h3 id="status" class="text-center"></h3>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/goal.js"></script>
+	<script type="text/javascript" src="js/problem.js"></script>
+	<script type="text/javascript" src="js/search.js"></script>
+	<script type="text/javascript" src="js/p5.min.js"></script>
+	<script type="text/javascript" src="js/utils.js"></script>
+	<script type="text/javascript" src="js/model.js"></script>
+	<script type="text/javascript" src="js/view.js"></script>
+	<script type="text/javascript" src="js/controller.js"></script>
+	<script>
+		document.getElementById("start-button").onclick = function () {
+			var text = this.innerHTML;
+			if (text === "START!") {
+				this.innerHTML = "STOP";
+				this.className = "btn btn-default";
+				controller.init();
+				controller.start();
+			}
+			else {
+				this.innerHTML = "START!";
+				this.className = "btn btn-danger";
+				controller.stop();
+			}
+		};
+	</script>
+  </body>
+</html>
