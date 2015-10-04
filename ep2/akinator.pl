@@ -1,0 +1,199 @@
+:- dynamic yes/1,no/1.
+
+go :- nl,
+      write('Pense em uma personagem, e eu tentarei adivinhar quem é.
+              Pensou (sim/não)?'),
+      nl,
+      read(Response),	
+      nl,
+      (Response == sim ; Response == s), 
+      write('Ótimo! Agora, responda sim ou não às seguintes perguntas:'),
+      nl, nl,
+      guess(Personagem),
+      write('A personagem é '),
+      write(Personagem),
+      nl,
+      undo.
+
+/* hipóteses a serem testadas */
+guess("você") :- voce, !.
+guess("irmao") :- irmao, !.
+guess("irma") :- irma, !.
+guess("tio") :- tio, !.
+guess("pai") :- pai, !.
+guess("tia") :- tia, !.
+guess("mae") :- mae,!.
+guess("avô") :- avoo, !.
+guess("avó") :- avoa,!.
+guess("Barack Obama") :- barack_obama, !.
+guess("Dilma Rousseff") :- dilma_rousseff, !.
+guess("William Bonner") :- william_bonner, !.
+guess("Fátima Bernardes") :- fatima_bernardes, !.
+guess("Johnny Depp") :- johnny_depp, !.
+guess("Felix Kjellberg - (PewdiePie)") :- pewdiepie, !.
+guess("Mickey Mouse") :- mickey_mouse, !.
+
+guess("Homer Simpsom") :- homer_simpsom, !.
+guess(tweety) :- tweety, !.
+guess(walter_white) :- walter_white, !.
+guess("desconhecida neste sistema").             
+
+/* regras */
+pessoa:- tem_gênero.
+
+animal:- verify(é_um_animal),!.
+animal:- not(pessoa).
+
+presidente:- pessoa,
+    famoso,
+    verify(é_presidente).
+
+famoso:- verify(é_famoso).
+
+brasileiro:- verify(nasceu_no_Brasil).
+
+cartoon:- (animal ; pessoa),
+    famoso,
+    verify(é_um_desenho).
+
+/*personagens*/
+homer_simpsom :- pessoa, 
+    cartoon,         
+    verify(é_amarelo),
+    verify(participa_numa_serie_TV),
+    verify(com_frequência_estrangula_seu_filho),
+    verify(é_conhecido_por_fazer_coisas_estúpidas),!.
+
+voce :- pessoa,
+    verify(pertence_a_tua_familia),
+    verify(é_filho_dos_teus_pais),
+    verify(nasceu_no_mesmo_dia_hora_minuto_e_segundo_que_voce),!.
+
+irmao:- (pessoa),
+    verify(pertence_a_tua_familia),
+    verify(é_filho_dos_teus_pais),
+    verify(é_do_gênero_masculino),
+    not(voce),!.
+
+irma:- (pessoa),
+    verify(pertence_a_tua_familia),
+    verify(é_filho_dos_teus_pais),
+    verify(é_do_gênero_feminino),
+    not(voce),!.
+
+tio :- pessoa,
+    verify(pertence_a_tua_familia),
+    verify(é_filho_dos_teus_avos),
+    verify(é_do_gênero_masculino),
+    verify(é_irmao_de_um_dos_teus_pais),!.
+
+pai :- pessoa,
+    verify(pertence_a_tua_familia),
+    verify(é_filho_dos_teus_avos),
+    verify(é_do_gênero_masculino),
+    not(tio),!.
+
+tia :- pessoa,
+    verify(pertence_a_tua_familia),
+    verify(é_filho_dos_teus_avos),
+    verify(é_do_gênero_feminino),
+    verify(é_irma_de_um_dos_teus_pais),!.
+
+mae :- pessoa,
+    verify(pertence_a_tua_familia),
+    verify(é_filho_dos_teus_avos),
+    verify(é_do_gênero_feminino),
+    not(tia),!.
+
+avoo :- pessoa,
+    verify(pertence_a_tua_familia),
+    verify(é_do_gênero_masculino),
+    verify(é_pai_de_um_dos_teus_pais),!.
+
+avoa :- pessoa,
+    verify(pertence_a_tua_familia),
+    verify(é_do_gênero_feminino),
+    verify(é_mae_de_um_dos_teus_pais),!.
+
+william_bonner :- pessoa, famoso,
+    verify(é_do_gênero_masculino),
+    verify(é_jornalista),
+   	verify(apresenta_o_jornal_nacional),!.
+
+fatima_bernardes :- pessoa, famoso,
+    verify(é_do_gênero_feminino),
+    verify(é_jornalista),
+    verify(é_casada_com_william_bonner),!.
+
+barack_obama :- presidente,
+	verify(é_do_gênero_masculino),
+	verify(mora_nos_Estados_Unidos_da_America),!.
+
+dilma_rousseff :- presidente,
+	brasileiro,
+	verify(é_do_gênero_feminino),!.
+	
+tony_ramos :- pessoa, famoso,
+    brasileiro,
+    verify(é_do_gênero_masculino),
+    verify(é_ator),
+    verify(atua_em_novelas_da_globo),
+    verify(é_conhecido_por_ter_muitos_pêlos_corporais),
+    verify(interpretou_Claudio_na_sequencia_de_filmes_Se_Eu_Fosse_Voce),!.
+
+johnny_depp :- pessoa, famoso,
+    verify(é_do_gênero_masculino),
+    verify(é_ator),
+    not(brasileiro),
+    verify(interpretou_capitao_Jack_Sparrow_na_serie_de_filmes_Piratas_do_Caribe),
+    verify(estrelou_o_filme_Edward_maos_de_tesoura),!.
+
+pewdiepie :- pessoa, famoso,
+    verify(é_do_gênero_masculino),
+    not(brasileiro),
+    verify(apresenta_um_canal_sobre_jogos_no_youtube),
+    verify(é_sueco),
+    verify(é_conhecido_pelo_nome_de_seu_canal_pewdiepie),!.
+
+mickey_mouse :- animal, cartoon,
+    verify(é_do_gênero_masculino),
+    verify(é_uma_personagem_da_Disney),
+    verify(é_um_rato),!.
+
+tweety :- animal, cartoon, 
+    	verify(é_amarelo),
+    	verify(participa_na_serie_Looney_Tunes),!.
+
+walter_white :- pessoa, 
+    	verify(é_do_gênero_masculino),
+        verify(é_do_mal),
+        verify(é_ator_drama),
+    	verify(participa_na_serie_Breaking_Bad),!.
+
+tem_gênero:- verify(é_do_gênero_masculino); verify(é_do_gênero_feminino),!.    
+no(é_do_gênero_feminino):- yes(é_do_gênero_masculino).
+yes(é_do_gênero_feminino):- no(é_do_gênero_masculino).
+
+
+/* Selecionador de perguntas */
+ask(Question) :-
+    write('A personagem  '),
+    write(Question),
+    write('? '),
+    read(Response),
+    nl,
+    ( (Response == sim ; Response == s)
+      ->
+      assert(yes(Question)) ;
+       assert(no(Question)), fail).
+
+
+/* Verificador de respostas */
+verify(S) :- 
+    (yes(S) -> true ; (no(S) -> fail ; ask(S))).
+
+/* desfaz asserções */
+undo :- retract(yes(_)),fail. 
+undo :- retract(no(_)),fail.
+undo.
+
