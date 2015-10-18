@@ -41,22 +41,26 @@ guess("Cebolinha - (Turma da Mônica)") :- cebolinha, !.
 guess("Cascão - (Turma da Mônica)") :- cascao, !.
 guess("Harry Potter") :- harry_potter, !.
 guess("Peter Pan") :- peter_pan, !.
-
-guess("Pato Donald") :- pato_donald, !.
-
-
-guess("Mickey Mouse") :- mickey_mouse, !.
-
 guess("Homer Simpsom") :- homer_simpsom, !.
+guess("Pato Donald") :- pato_donald, !.
+guess("Mickey Mouse") :- mickey_mouse, !.
+guess("R2D2") :- r2d2, !.
+guess("ET") :- et, !.
+
 guess(tweety) :- tweety, !.
 guess(walter_white) :- walter_white, !.
 guess("desconhecida neste sistema").             
 
 /* regras */
-pessoa:- tem_gênero.
+pessoa:- verify(é_uma_pessoa),
+    tem_gênero,!.
 
-animal:- verify(é_um_animal),!.
-animal:- not(pessoa).
+animal:- not(pessoa),
+    verify(é_um_animal),!.
+
+coisa:- not(animal),
+    not(pessoa),
+    famoso.
 
 presidente:- pessoa,
     famoso,
@@ -66,30 +70,29 @@ famoso:- verify(é_famoso).
 
 brasileiro:- verify(nasceu_no_Brasil).
 
-cartoon:- (animal ; pessoa),
+cartoon:- (animal; pessoa),
     famoso,
     verify(é_um_desenho).
 
+
+tem_gênero:- verify(é_do_gênero_masculino); verify(é_do_gênero_feminino),!.    
+no(é_do_gênero_feminino):- yes(é_do_gênero_masculino).
+yes(é_do_gênero_feminino):- no(é_do_gênero_masculino).
+
 /*personagens*/
-homer_simpsom :- pessoa, 
-    cartoon,         
-    verify(é_amarelo),
-    verify(participa_numa_serie_TV),
-    verify(com_frequência_estrangula_seu_filho),
-    verify(é_conhecido_por_fazer_coisas_estúpidas),!.
 
 voce :- pessoa,
     verify(pertence_a_tua_familia),
     verify(é_filho_dos_teus_pais),
     verify(nasceu_no_mesmo_dia_hora_minuto_e_segundo_que_voce),!.
 
-irmao:- (pessoa),
+irmao:- pessoa,
     verify(pertence_a_tua_familia),
     verify(é_filho_dos_teus_pais),
     verify(é_do_gênero_masculino),
     not(voce),!.
 
-irma:- (pessoa),
+irma:- pessoa,
     verify(pertence_a_tua_familia),
     verify(é_filho_dos_teus_pais),
     verify(é_do_gênero_feminino),
@@ -240,14 +243,28 @@ pato_donald :- animal, cartoon,
     verify(é_um_pato),
     verify(tem_voz_grasnada), !.
 
-    
-    
-
 mickey_mouse :- animal, cartoon,
     verify(é_do_gênero_masculino),
     verify(é_uma_personagem_da_Disney),
     verify(é_um_rato),!.
+    
+homer_simpsom :- pessoa, 
+    cartoon,         
+    verify(é_amarelo),
+    verify(participa_numa_serie_TV),
+    verify(com_frequência_estrangula_seu_filho),
+    verify(é_conhecido_por_fazer_coisas_estúpidas),!.
+    
+r2d2 :- coisa,
+    verify(é_um_robô),
+    verify(participa_da_série_Star_Wars),
+    verify(é_um_droide_astromecânico_que_aparece_em_todos_os_filmes_da_serie),!.
 
+et :- coisa,
+    verify(é_um_ser_de_outro_planeta),
+    verify(aparece_em_um_filme_homônimo_de_Steven_Spilberg),
+    verify(quer_telefonar_para_sua_casa),!.
+    
 tweety :- animal, cartoon, 
     	verify(é_amarelo),
     	verify(participa_na_serie_Looney_Tunes),!.
@@ -257,11 +274,6 @@ walter_white :- pessoa,
         verify(é_do_mal),
         verify(é_ator_drama),
     	verify(participa_na_serie_Breaking_Bad),!.
-
-tem_gênero:- verify(é_do_gênero_masculino); verify(é_do_gênero_feminino),!.    
-no(é_do_gênero_feminino):- yes(é_do_gênero_masculino).
-yes(é_do_gênero_feminino):- no(é_do_gênero_masculino).
-
 
 /* Selecionador de perguntas */
 ask(Question) :-
