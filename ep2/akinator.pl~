@@ -1,3 +1,11 @@
+/********************************************************/
+/*   E.P. 2 MAC0425 - Inteligência Artificial           */
+/*                                                      */
+/*   Evandro Augusto Nunes Sanches N.USP 5388861        */
+/*                                                      */
+/*   Este programa foi elaborado utilizando  como base  */
+/*  o codigo desenvolvido pela monitora da disciplina.  */
+/********************************************************/
 :- dynamic yes/1,no/1.
 
 go :- nl,

@@ -79,8 +79,11 @@ famoso:- verify(é_famoso).
 brasileiro:- verify(nasceu_no_Brasil).
 
 cartoon:- (animal; pessoa),
-    famoso,
+    ficticio,
     verify(é_um_desenho).
+
+ficticio:- verify(é_uma_personagem_fictícia).
+real:- not(ficticio).
 
 
 tem_gênero:- verify(é_do_gênero_masculino); verify(é_do_gênero_feminino),!.    
@@ -89,76 +92,76 @@ yes(é_do_gênero_feminino):- no(é_do_gênero_masculino).
 
 /*personagens*/
 
-voce :- pessoa,
+voce :- real, pessoa,
     verify(pertence_a_tua_familia),
     verify(é_filho_dos_teus_pais),
     verify(nasceu_no_mesmo_dia_hora_minuto_e_segundo_que_voce),!.
 
-irmao:- pessoa,
+irmao:- real, pessoa,
     verify(pertence_a_tua_familia),
     verify(é_filho_dos_teus_pais),
     verify(é_do_gênero_masculino),
     not(voce),!.
 
-irma:- pessoa,
+irma:- real, pessoa,
     verify(pertence_a_tua_familia),
     verify(é_filho_dos_teus_pais),
     verify(é_do_gênero_feminino),
     not(voce),!.
 
-tio :- pessoa,
+tio :- real, pessoa,
     verify(pertence_a_tua_familia),
     verify(é_filho_dos_teus_avos),
     verify(é_do_gênero_masculino),
     verify(é_irmao_de_um_dos_teus_pais),!.
 
-pai :- pessoa,
+pai :- real, pessoa,
     verify(pertence_a_tua_familia),
     verify(é_filho_dos_teus_avos),
     verify(é_do_gênero_masculino),
     not(tio),!.
 
-tia :- pessoa,
+tia :- real, pessoa,
     verify(pertence_a_tua_familia),
     verify(é_filho_dos_teus_avos),
     verify(é_do_gênero_feminino),
     verify(é_irma_de_um_dos_teus_pais),!.
 
-mae :- pessoa,
+mae :- real, pessoa,
     verify(pertence_a_tua_familia),
     verify(é_filho_dos_teus_avos),
     verify(é_do_gênero_feminino),
     not(tia),!.
 
-avoo :- pessoa,
+avoo :- real, pessoa,
     verify(pertence_a_tua_familia),
     verify(é_do_gênero_masculino),
     verify(é_pai_de_um_dos_teus_pais),!.
 
-avoa :- pessoa,
+avoa :- real, pessoa,
     verify(pertence_a_tua_familia),
     verify(é_do_gênero_feminino),
     verify(é_mae_de_um_dos_teus_pais),!.
 
-william_bonner :- pessoa, famoso,
+william_bonner :- real, pessoa, famoso,
     verify(é_do_gênero_masculino),
     verify(é_jornalista),
    	verify(apresenta_o_jornal_nacional),!.
 
-fatima_bernardes :- pessoa, famoso,
+fatima_bernardes :- real, pessoa, famoso,
     verify(é_do_gênero_feminino),
     verify(é_jornalista),
     verify(é_casada_com_william_bonner),!.
 
-barack_obama :- presidente,
+barack_obama :- real, presidente,
 	verify(é_do_gênero_masculino),
 	verify(mora_nos_Estados_Unidos_da_America),!.
 
-dilma_rousseff :- presidente,
+dilma_rousseff :- real, presidente,
 	brasileiro,
 	verify(é_do_gênero_feminino),!.
 	
-tony_ramos :- pessoa, famoso,
+tony_ramos :- real, pessoa, famoso,
     brasileiro,
     verify(é_do_gênero_masculino),
     verify(é_ator),
@@ -166,28 +169,28 @@ tony_ramos :- pessoa, famoso,
     verify(é_conhecido_por_ter_muitos_pêlos_corporais),
     verify(interpretou_Claudio_na_sequencia_de_filmes_Se_Eu_Fosse_Voce),!.
     
-angelina_jolie :- pessoa, famoso,
+angelina_jolie :- real, pessoa, famoso,
     not(brasileiro),
     verify(é_do_gênero_feminino),
     verify(é_atriz),
     verify(estrelou_o_filme_Tomb_Raider),
     verify(é_casada_com_Brad_Pitt),!.
 
-johnny_depp :- pessoa, famoso,
+johnny_depp :- real, pessoa, famoso,
     not(brasileiro),
     verify(é_do_gênero_masculino),
     verify(é_ator),
     verify(interpretou_capitao_Jack_Sparrow_na_serie_de_filmes_Piratas_do_Caribe),
     verify(estrelou_o_filme_Edward_maos_de_tesoura),!.
 
-pewdiepie :- pessoa, famoso,
+pewdiepie :- real, pessoa, famoso,
     not(brasileiro),
     verify(é_do_gênero_masculino),
     verify(apresenta_um_canal_sobre_jogos_no_youtube),
     verify(é_sueco),
     verify(é_conhecido_pelo_nome_de_seu_canal_pewdiepie),!.
 
-ronaldo_fenomeno :- pessoa, famoso,
+ronaldo_fenomeno :- real, pessoa, famoso,
     brasileiro,
     verify(é_do_gênero_masculino),
     verify(é_jogador_de_futebol),
@@ -195,49 +198,49 @@ ronaldo_fenomeno :- pessoa, famoso,
     verify(finalizou_sua_carreira_como_atleta_no_Corinthians),
     verify(fez_sucesso_com_um_corte_de_cabelo_estilo_cascao),!.
     
-edson_pele :- pessoa, famoso,
+edson_pele :- real, pessoa, famoso,
     brasileiro,
     verify(é_do_gênero_masculino),
     verify(é_jogador_de_futebol),
     verify(tem_uma_marca_de_café_homônima),
     verify(foi_considerado_melhor_do_que_Maradona),!.
 
-monica :- pessoa, famoso,
+monica :- ficticio, pessoa,
     brasileiro,
     verify(é_do_gênero_feminino),
     verify(tem_um_gibi_com_seu_nome),
     verify(criado_pelo_cartunista_Maurício_de_Souza),
     verify(é_dentucinha_e_sabichona),!.
     
-magali :- pessoa, famoso,
+magali :- ficticio, pessoa,
     brasileiro,
     verify(é_do_gênero_feminino),
     verify(tem_um_gibi_com_seu_nome),
     verify(criado_pelo_cartunista_Maurício_de_Souza),
     verify(é_comilona_e_adora_melancia),!.
 
-cebolinha :- pessoa, famoso,
+cebolinha :- ficticio, pessoa,
     brasileiro,
     verify(é_do_gênero_masculino),
     verify(tem_um_gibi_com_seu_nome),
     verify(criado_pelo_cartunista_Maurício_de_Souza),
     verify(troca_o_R_pelo_L_quando_fala),!.
 
-cascao :- pessoa, famoso,
+cascao :- ficticio, pessoa,
     brasileiro,
     verify(é_do_gênero_masculino),
     verify(tem_um_gibi_com_seu_nome),
     verify(criado_pelo_cartunista_Maurício_de_Souza),
     verify(tem_medo_de_água),!.
 
-harry_potter :- pessoa, famoso,
+harry_potter :- ficticio, pessoa,
     not(brasileiro),
     verify(é_do_gênero_masculino),
     verify(tem_um_livro_com_seu_nome),
     verify(criado_pela_escritora_J_K_Rowling),
     verify(tem_uma_cicatriz_em_forma_de_raio_na_testa),!.
 
-peter_pan :- pessoa, famoso,
+peter_pan :- ficticio, pessoa,
     not(brasileiro),
     verify(é_do_gênero_masculino),
     verify(tem_um_livro_com_seu_nome),
@@ -245,20 +248,20 @@ peter_pan :- pessoa, famoso,
     verify(vive_na_Terra_do_Nunca),
     verify(é_lider_dos_meninos_perdidos),!.
 
-pato_donald :- animal, cartoon,
+pato_donald :- cartoon, animal,
     not(brasileiro),
     verify(é_do_gênero_masculino),
     verify(é_uma_personagem_da_Disney),
     verify(é_um_pato),
     verify(tem_voz_grasnada), !.
 
-mickey_mouse :- animal, cartoon,
+mickey_mouse :- cartoon, animal,
     not(brasileiro),
     verify(é_do_gênero_masculino),
     verify(é_uma_personagem_da_Disney),
     verify(é_um_rato),!.
     
-homer_simpsom :- pessoa, cartoon,
+homer_simpsom :- cartoon, pessoa,
     not(brasileiro),
     verify(é_amarelo),
     verify(participa_numa_serie_TV),
@@ -275,15 +278,14 @@ et :- coisa,
     verify(aparece_em_um_filme_homônimo_de_Steven_Spilberg),
     verify(quer_telefonar_para_sua_casa),!.
     
-tweety :- animal, cartoon, 
+tweety :- cartoon, animal, 
     	verify(é_amarelo),
     	verify(participa_na_serie_Looney_Tunes),!.
 
-walter_white :- pessoa, 
+walter_white :- ficticio, pessoa,
     	verify(é_do_gênero_masculino),
-        verify(é_do_mal),
-        verify(é_ator_drama),
-    	verify(participa_na_serie_Breaking_Bad),!.
+    	verify(participa_na_serie_Breaking_Bad),
+        verify(muda_seu_comportamento_durante_a_série_por_descobrir_que_tem_câncer),!.
 
 /* Selecionador de perguntas */
 ask(Question) :-
