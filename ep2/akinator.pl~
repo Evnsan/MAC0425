@@ -159,22 +159,22 @@ tony_ramos :- pessoa, famoso,
     verify(interpretou_Claudio_na_sequencia_de_filmes_Se_Eu_Fosse_Voce),!.
     
 angelina_jolie :- pessoa, famoso,
+    not(brasileiro),
     verify(é_do_gênero_feminino),
     verify(é_atriz),
-    not(brasileiro),
     verify(estrelou_o_filme_Tomb_Raider),
     verify(é_casada_com_Brad_Pitt),!.
 
 johnny_depp :- pessoa, famoso,
+    not(brasileiro),
     verify(é_do_gênero_masculino),
     verify(é_ator),
-    not(brasileiro),
     verify(interpretou_capitao_Jack_Sparrow_na_serie_de_filmes_Piratas_do_Caribe),
     verify(estrelou_o_filme_Edward_maos_de_tesoura),!.
 
 pewdiepie :- pessoa, famoso,
-    verify(é_do_gênero_masculino),
     not(brasileiro),
+    verify(é_do_gênero_masculino),
     verify(apresenta_um_canal_sobre_jogos_no_youtube),
     verify(é_sueco),
     verify(é_conhecido_pelo_nome_de_seu_canal_pewdiepie),!.
@@ -238,18 +238,20 @@ peter_pan :- pessoa, famoso,
     verify(é_lider_dos_meninos_perdidos),!.
 
 pato_donald :- animal, cartoon,
+    not(brasileiro),
     verify(é_do_gênero_masculino),
     verify(é_uma_personagem_da_Disney),
     verify(é_um_pato),
     verify(tem_voz_grasnada), !.
 
 mickey_mouse :- animal, cartoon,
+    not(brasileiro),
     verify(é_do_gênero_masculino),
     verify(é_uma_personagem_da_Disney),
     verify(é_um_rato),!.
     
-homer_simpsom :- pessoa, 
-    cartoon,         
+homer_simpsom :- pessoa, cartoon,
+    not(brasileiro),
     verify(é_amarelo),
     verify(participa_numa_serie_TV),
     verify(com_frequência_estrangula_seu_filho),
